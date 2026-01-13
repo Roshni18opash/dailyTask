@@ -1,10 +1,20 @@
 const menuOpenButton = document.querySelector("#menu-open-button");
+const navLinks = document.querySelectorAll(".nav-link .nav-menu");
 const menuCloseButton = document.querySelector("#menu-close-button");
+
+//toggle mobile menu visibility
 menuOpenButton.addEventListener("click",()=>{
     document.body.classList.toggle("show-mobile-menu")
 })
-
+//close menu when close button is clicked
 menuCloseButton.addEventListener("click",()=>menuOpenButton.click())
+
+
+//close menu when the nalink is clicked
+navLinks.forEach(link=>{
+    link.addEventListener("click",()=>menuOpenButton.click())
+});
+
 
 // initialize swipper
 const swiper = new Swiper('.slider-wrapeer', {
