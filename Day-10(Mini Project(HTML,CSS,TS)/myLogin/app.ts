@@ -36,5 +36,7 @@ loginForm?.addEventListener("submit",(event:Event):void=>{
     if(isvalid){
        message && (message.textContent="Login Successfull!");
         loginForm?.reset();
+ window.location.href = "home.html";
     }
+   
 });

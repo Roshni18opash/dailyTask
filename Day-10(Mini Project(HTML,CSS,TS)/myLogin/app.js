@@ -37,4 +37,5 @@ loginForm === null || loginForm === void 0 ? void 0 : loginForm.addEventListener
         message && (message.textContent = "Login Successfull!");
         loginForm === null || loginForm === void 0 ? void 0 : loginForm.reset();
     }
+    window.location.href = "home.html";
 });
