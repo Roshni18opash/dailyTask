@@ -1,16 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-// 1️⃣ Get form element
-const form = document.getElementById("ageForm");
-// 2️⃣ Get input elements
-const username = document.getElementById("username");
-const ageInput = document.getElementById("age");
-// 3️⃣ Get error & message elements
-const nameError = document.getElementById("nameError");
-const ageError = document.getElementById("ageError");
-const successMsg = document.getElementById("successMsg");
-// 4️⃣ LIVE Name validation
-username.addEventListener("input", () => {
+var form = document.getElementById("ageForm");
+var username = document.getElementById("username");
+var ageInput = document.getElementById("age");
+var nameError = document.getElementById("nameError");
+var ageError = document.getElementById("ageError");
+var successMsg = document.getElementById("successMsg");
+username.addEventListener("input", function () {
     if (username.value.trim() === "") {
         nameError.textContent = "Name is required";
     }
@@ -18,9 +12,8 @@ username.addEventListener("input", () => {
         nameError.textContent = "";
     }
 });
-// 5️⃣ LIVE Age validation
-ageInput.addEventListener("input", () => {
-    const age = Number(ageInput.value);
+ageInput.addEventListener("input", function () {
+    var age = Number(ageInput.value);
     if (age < 18) {
         ageError.textContent = "Age must be 18 or above";
     }
@@ -28,22 +21,18 @@ ageInput.addEventListener("input", () => {
         ageError.textContent = "";
     }
 });
-// 6️⃣ Form submit validation
-form.addEventListener("submit", (event) => {
-    event.preventDefault(); // stop reload
-    let isValid = true;
-    // Name check
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var isValid = true;
     if (username.value.trim() === "") {
         nameError.textContent = "Name is required";
         isValid = false;
     }
-    // Age check
-    const age = Number(ageInput.value);
+    var age = Number(ageInput.value);
     if (age < 18 || ageInput.value === "") {
         ageError.textContent = "Valid age (18+) required";
         isValid = false;
     }
-    // 7️⃣ Success message
     if (isValid) {
         successMsg.textContent = "Form submitted successfully 🎉";
         form.reset();
@@ -52,4 +41,3 @@ form.addEventListener("submit", (event) => {
         successMsg.textContent = "";
     }
 });
-//# sourceMappingURL=age.js.map

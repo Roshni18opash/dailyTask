@@ -102,6 +102,17 @@ Clipboard     -  `ClipboardEvent`
  Drag         -  `DragEvent`      
  Touch     -      `TouchEvent`     
 UI / Window    - `UIEvent`        
+1️⃣ What is Form Handling?
+
+			Form handling means:
+Getting data from a form, validating it, and processing it when the user submits it.
+
+Example form data:
+Username
+Email
+Password
+Checkbox / Radio
+select dropdown
 
 
 

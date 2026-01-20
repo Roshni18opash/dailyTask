@@ -11,15 +11,11 @@ form {
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
-/* Label above input */
 label {
   display: block;
   margin-bottom: 4px;
   font-weight: 600;
 }
-
-/* Input field */
 input {
   width: 100%;
   padding: 8px;
@@ -27,17 +23,13 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
-/* Error message space (IMPORTANT PART) */
 small {
   display: block;
-  min-height: 18px;   /* reserve space */
+  min-height: 18px;   
   font-size: 12px;
   color: red;
   margin-bottom: 12px;
 }
-
-/* Button */
 button {
   width: 100%;
   padding: 8px;
@@ -51,8 +43,6 @@ button {
 button:hover {
   background: #0056b3;
 }
-
-/* Success message */
 #successMsg {
   margin-top: 10px;
   color: green;
