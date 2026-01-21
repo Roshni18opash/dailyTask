@@ -82,27 +82,27 @@ button.delete-btn, button.edit-btn {
 }
 
 button.delete-btn {
-  background: #dc3545;
+  background: #e9e7e8;
   color: white;
 }
 
 button.delete-btn:hover {
-  background: #a71d2a;
+  background: #f7f8f7;
 }
 
 button.edit-btn {
-  background: #ffc107;
+
   color: white;
 }
 
 button.edit-btn:hover {
-  background: #e0a800;
+    background: #007bff;
 }
 
 #clearAllBtn {
-  width: 100%;
+  width: 30%;
   padding: 10px;
-  background-color: #6c757d;
+ background: #007bff;
   color: white;
   border: none;
   border-radius: 6px;
@@ -110,5 +110,5 @@ button.edit-btn:hover {
 }
 
 #clearAllBtn:hover {
-  background-color: #495057;
+  background-color: #ca2929;
 }
