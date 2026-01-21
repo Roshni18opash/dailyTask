@@ -1,47 +1,37 @@
-// Task interface
 interface Task {
   id: number;
   title: string;
   completed: boolean;
 }
 
-// DOM elements
 const taskInput = document.getElementById("taskInput") as HTMLInputElement;
 const addTaskBtn = document.getElementById("addTaskBtn") as HTMLButtonElement;
 const taskList = document.getElementById("taskList") as HTMLUListElement;
+const clearAllBtn = document.getElementById("clearAllBtn") as HTMLButtonElement;
 
-// Task array
+// Load tasks from LS
 let tasks: Task[] = loadTasks();
 
-// Event
-addTaskBtn.addEventListener("click", addTask);
-
-// Add task
-function addTask(): void {
-  const title = taskInput.value.trim();
-
-  if (title === "") {
-    alert("Task cannot be empty");
-    return;
-  }
-
-  const newTask: Task = {
-    id: Date.now(),
-    title,
-    completed: false
-  };
-
-  tasks.push(newTask);
-  saveTasks();
-  renderTasks();
-  taskInput.value = "";
+//task loaded here
+function loadTasks(): Task[] {
+  const data = localStorage.getItem("tasks");
+  return data ? JSON.parse(data) : [];
 }
 
-// Render tasks (FIXED ALIGNMENT)
+// task save here
+function saveTasks(): void {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// rendering task here
 function renderTasks(): void {
+  if (!taskList) return;
+
   taskList.innerHTML = "";
 
-  tasks.forEach(task => {
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
+
     const li = document.createElement("li");
     li.className = "task-item";
 
@@ -51,54 +41,92 @@ function renderTasks(): void {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = task.completed;
-    checkbox.onchange = () => toggleTask(task.id);
+    checkbox.addEventListener("change", () => toggleTask(task.id));
 
     const span = document.createElement("span");
     span.textContent = task.title;
-    if (task.completed) {
-      span.classList.add("completed");
-    }
+    if (task.completed) span.classList.add("completed");
 
     leftDiv.appendChild(checkbox);
     leftDiv.appendChild(span);
 
+    // for edit task
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "✏️";
+    editBtn.className = "edit-btn";
+    editBtn.addEventListener("click", () => editTask(task.id));
+
+    // for delete task
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
+    deleteBtn.textContent = "❌";
     deleteBtn.className = "delete-btn";
-    deleteBtn.onclick = () => deleteTask(task.id);
+    deleteBtn.addEventListener("click", () => deleteTask(task.id));
 
     li.appendChild(leftDiv);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
 
     taskList.appendChild(li);
-  });
+  }
 }
 
-// Toggle task status
+// for add new task
+addTaskBtn.addEventListener("click", () => {
+  if (!taskInput) return;
+  const title = taskInput.value.trim();
+  if (!title) return;
+
+  const newTask: Task = {
+    id: Date.now(),
+    title,
+    completed: false,
+  };
+
+  tasks.push(newTask);
+  saveTasks();
+  renderTasks();
+  taskInput.value = "";
+});
+
+// toggling task
 function toggleTask(id: number): void {
-  tasks = tasks.map(task =>
-    task.id === id ? { ...task, completed: !task.completed } : task
-  );
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      tasks[i].completed = !tasks[i].completed;
+      break;
+    }
+  }
   saveTasks();
   renderTasks();
 }
 
-// Delete task
+// for delete
 function deleteTask(id: number): void {
   tasks = tasks.filter(task => task.id !== id);
   saveTasks();
   renderTasks();
 }
 
-// Local storage
-function saveTasks(): void {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+// for edit
+function editTask(id: number): void {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      const newTitle = prompt("Edit task", tasks[i].title);
+      if (newTitle !== null && newTitle.trim() !== "") {
+        tasks[i].title = newTitle.trim();
+      }
+      break;
+    }
+  }
+  saveTasks();
+  renderTasks();
 }
 
-function loadTasks(): Task[] {
-  const data = localStorage.getItem("tasks");
-  return data ? JSON.parse(data) : [];
-}
-
-// Initial render
+// remove all task
+clearAllBtn.addEventListener("click", () => {
+  tasks = [];
+  localStorage.removeItem("tasks");
+  renderTasks();
+});
+//rendering in intial
 renderTasks();
