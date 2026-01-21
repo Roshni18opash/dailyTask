@@ -1,0 +1,7 @@
+				What is Loose JS?
+Loose JavaScript:
+No types
+No null checks
+Can cause runtime errors
+Works but not safe
+
