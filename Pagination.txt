@@ -1,0 +1,5 @@
+					React Pagination
+
+install "npm i react-paginate"
+"npm i react-bootstrap bootsrap axios
+import

@@ -1,0 +1,12 @@
+
+Try/catch blocks can’t catch errors that happen during React’s rendering process. Errors thrown in rendering methods or hooks bubble up through the component tree. 
+Only Error Boundaries can catch these errors
+
+// ✅ Using error boundary
+function Parent() {
+  return (
+    <ErrorBoundary>
+      <ChildComponent />
+    </ErrorBoundary>
+  );
+}

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useAuth } from "../Context/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -16,16 +17,14 @@ const Login = () => {
       setError("Please fill in all fields");
       return;
     }
-
     login({ id: Date.now(), name, email });
     navigate("/welcome");
   };
-
   return (
     <div style={containerStyle}>
       <form style={formStyle} onSubmit={handleSubmit}>
         <h1 style={titleStyle}>LogIn</h1>
-        {/* <p style={subtitleStyle}>Welcome to the Page</p> */}
+         <p style={subtitleStyle}>Welcome to the Page</p> 
 
         {error && <p style={errorStyle}>{error}</p>}
 
@@ -51,8 +50,9 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
+//styles
+
 const containerStyle: React.CSSProperties = {
   height: "100vh",
   display: "flex",
@@ -64,7 +64,6 @@ const containerStyle: React.CSSProperties = {
   backgroundPosition: "center",
   fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
 };
-
 const formStyle: React.CSSProperties = {
   width: 360,
   padding: 40,
@@ -86,21 +85,18 @@ const titleStyle: React.CSSProperties = {
   fontSize: 28,
   color: "#333",
 };
-
-// const subtitleStyle: React.CSSProperties = {
-//   margin: 0,
-//   textAlign: "center",
-//   color: "#555",
-//   fontSize: 14,
-// };
-
+const subtitleStyle: React.CSSProperties = {
+  margin: 0,
+  textAlign: "center",
+  color: "#555",
+  fontSize: 14,
+};
 const inputStyle: React.CSSProperties = {
   padding: 12,
   borderRadius: 8,
   border: "1px solid #ccc",
   fontSize: 14,
 };
-
 const buttonStyle: React.CSSProperties = {
   padding: 12,
   borderRadius: 8,
@@ -114,7 +110,6 @@ const buttonStyle: React.CSSProperties = {
   width:"30%",
     alignSelf: "center",
 };
-
 const errorStyle: React.CSSProperties = {
   color: "red",
   fontSize: 13,
