@@ -10,3 +10,106 @@ function Parent() {
     </ErrorBoundary>
   );
 }
+			🔹 What is Error Handling?
+Error handling means preventing your whole app from crashing when a bug happens.
+In React, if one component crashes, the entire app can break ❌
+To avoid this, React provides Error Boundaries.
+			🔹 What is an Error Boundary?
+An Error Boundary is a special React component that:
+✔ Catches JavaScript errors
+✔ Shows a fallback UI instead of a blank screen
+✔ Keeps the rest of the app running
+
+⚠️ Important:
+Error Boundaries work only in class components
+They catch errors in:
+Rendering
+Lifecycle methods
+Child components
+			🔹 When to use Error Boundary?
+Perfect for:
+Global app errors
+API failures
+UI crashes
+Production apps
+
+Component crashes ❌
+        ↓
+ErrorBoundary catches error ✅
+        ↓
+Fallback UI shown 🧯
+        ↓
+App does NOT crash 💪
+
+src/
+ ├─ components/
+ │   ├─ ErrorBoundary.tsx
+ │   ├─ BuggyComponent.tsx
+ ├─ App.tsx
+ ├─ main.tsx
+
+import React, { Component, ReactNode } from "react";
+
+type Props = {
+  children: ReactNode;
+};
+
+type State = {
+  hasError: boolean;
+};
+
+class ErrorBoundary extends Component<Props, State> {
+  state: State = {
+    hasError: false,
+  };
+
+  // Runs when an error happens
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  // Logs error (optional)
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error("Error caught:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={fallbackStyle}>
+          <h1>⚠️ Something went wrong</h1>
+          <p>Please refresh the page or try again later.</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;
+
+// Fallback UI style
+const fallbackStyle: React.CSSProperties = {
+  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "#f8d7da",
+  color: "#721c24",
+};
+
+const BuggyComponent = () => {
+  throw new Error("App crashed!");
+};
+
+export default BuggyComponent;
+
+
+
+
+
+
+
+
