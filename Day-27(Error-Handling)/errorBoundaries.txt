@@ -2,7 +2,7 @@
 Try/catch blocks can’t catch errors that happen during React’s rendering process. Errors thrown in rendering methods or hooks bubble up through the component tree. 
 Only Error Boundaries can catch these errors
 
-// ✅ Using error boundary
+// Using error boundary
 function Parent() {
   return (
     <ErrorBoundary>
@@ -16,9 +16,9 @@ In React, if one component crashes, the entire app can break ❌
 To avoid this, React provides Error Boundaries.
 			🔹 What is an Error Boundary?
 An Error Boundary is a special React component that:
-✔ Catches JavaScript errors
-✔ Shows a fallback UI instead of a blank screen
-✔ Keeps the rest of the app running
+*Catches JavaScript errors
+*Shows a fallback UI instead of a blank screen
+* Keeps the rest of the app running
 
 ⚠️ Important:
 Error Boundaries work only in class components
@@ -33,79 +33,40 @@ API failures
 UI crashes
 Production apps
 
-Component crashes ❌
+Component crashes 
         ↓
-ErrorBoundary catches error ✅
+ErrorBoundary catches error 
         ↓
 Fallback UI shown 🧯
         ↓
 App does NOT crash 💪
 
-src/
- ├─ components/
- │   ├─ ErrorBoundary.tsx
- │   ├─ BuggyComponent.tsx
- ├─ App.tsx
- ├─ main.tsx
 
-import React, { Component, ReactNode } from "react";
+class base components se error find kr skte he
+function base se nahi
+error not catch in event ,promises async
+opps concept
+remove balnk page other working components work
+individual componet me perticular error set krva component me ek attribute use krna hota he nam he fallback={html}
+exact error btava mate k actual ma thyu su che ae mate <p>{this.state.error.message}</p>
+lifecycle method login errorr mate
 
-type Props = {
-  children: ReactNode;
-};
+window.onerror = function (message, source, error) {
+ Ye global JavaScript error handler hai.
 
-type State = {
-  hasError: boolean;
-};
+Jab bhi:
+JavaScript crash hota hai
+runtime error aata hai
+koi uncaught error hoti hai
 
-class ErrorBoundary extends Component<Props, State> {
-  state: State = {
-    hasError: false,
-  };
+Browser automatically window.onerror call karta hai.
+Ye code flow kaise chalta hai?
 
-  // Runs when an error happens
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  // Logs error (optional)
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error("Error caught:", error, info);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div style={fallbackStyle}>
-          <h1>⚠️ Something went wrong</h1>
-          <p>Please refresh the page or try again later.</p>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-
-export default ErrorBoundary;
-
-// Fallback UI style
-const fallbackStyle: React.CSSProperties = {
-  height: "100vh",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "#f8d7da",
-  color: "#721c24",
-};
-
-const BuggyComponent = () => {
-  throw new Error("App crashed!");
-};
-
-export default BuggyComponent;
-
+1️Browser React app load karta hai
+2 window.onerror pehle register ho jata hai
+3 Agar kahin bhi JS error aata hai
+4️Browser window.onerror() ko call karta hai
+5 Tum console me error dekh sakte ho
 
 
 
